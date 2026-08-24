@@ -514,26 +514,16 @@ function App() {
   if (screen === "select") {
     return (
       <main className="select-screen">
-        <header className="setup-header">
-          <a className="brand-mark" href={MODEL_COLLECTION_URL} target="_blank" rel="noreferrer">
-            <BrandIcon />
-            <span>Translate</span>
-          </a>
-          <span className="local-badge"><span /> Runs on this device</span>
-        </header>
-
         <div className="setup-layout">
-          <section className="setup-intro">
-            <p className="eyebrow">A two-person interpreter</p>
-            <h1>Put the screen between you and start talking.</h1>
-            <p>Each person gets a side. Speech, transcription, and HY-MT2 translation stay on this device after download.</p>
-          </section>
+          <header className="setup-intro">
+            <a className="select-title" href={MODEL_COLLECTION_URL} target="_blank" rel="noreferrer">Translate</a>
+            <p className="select-subtitle">Local conversation translation with HY-MT2</p>
+          </header>
 
           <section className="setup-languages" aria-labelledby="languages-title">
             <div className="section-heading">
               <div>
-                <span className="setup-step">01</span>
-                <h2 id="languages-title">Choose the two languages</h2>
+                <h2 id="languages-title">Languages</h2>
               </div>
               <button className="quiet-button" type="button" onClick={swapLanguages}>
                 <SwapIcon /> Swap
@@ -561,8 +551,7 @@ function App() {
           <section className="model-picker" aria-labelledby="model-title">
             <div className="section-heading">
               <div>
-                <span className="setup-step">02</span>
-                <h2 id="model-title">Choose a model</h2>
+                <h2 id="model-title">Model</h2>
               </div>
               <a className="text-link" href={MODEL_CARD_URL} target="_blank" rel="noreferrer">About HY-MT2</a>
             </div>
@@ -600,8 +589,7 @@ function App() {
           <section className="start-section" aria-labelledby="start-title">
             <div className="section-heading">
               <div>
-                <span className="setup-step">03</span>
-                <h2 id="start-title">Start translating</h2>
+                <h2 id="start-title">Mode</h2>
               </div>
             </div>
             <div className="start-actions">
@@ -628,7 +616,6 @@ function App() {
       <main className="loading-screen">
         <header className="setup-header compact">
           <button className="brand-mark button-reset" type="button" onClick={goBackToSelect}>
-            <BrandIcon />
             <span>Translate</span>
           </button>
           <button type="button" className="quiet-button" onClick={goBackToSelect}>Back</button>
@@ -663,11 +650,11 @@ function App() {
     <main className={appClass}>
       <header className="top-bar">
         <button className="top-brand button-reset" type="button" onClick={goBackToSelect}>
-          <BrandIcon />
           <span>Translate</span>
         </button>
+        <span className="top-bar-divider">/</span>
+        <span className="top-bar-mode">{mode === "speech" ? "Voice" : "Text"}</span>
         <div className={`runtime-pill is-${runtime.status}`} role="status">
-          <span className="runtime-dot" />
           <span>{runtime.label}</span>
         </div>
         <button type="button" className="model-chip" onClick={goBackToSelect}>
@@ -1095,10 +1082,6 @@ function getRuntimeSummary(
   if (states.some((state) => state.status === "loading")) return { status: "loading", label: "Preparing", progress, ready: false };
   if (states.every((state) => state.status === "ready")) return { status: "ready", label: "Ready · Local", progress: 100, ready: true };
   return { status: "idle", label: "Local", progress: 0, ready: false };
-}
-
-function BrandIcon() {
-  return <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M5.5 6.5h10v8h-5l-3.5 3v-3H5.5z" /><path d="M12.5 11.5h10v8H21l-3.5 3v-3h-5z" /></svg>;
 }
 
 function MicrophoneIcon() {
