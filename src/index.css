@@ -1909,8 +1909,8 @@ a:focus-visible,
   text-transform: uppercase;
 }
 
-.select-subtitle {
-  margin: 0.55rem 0 0;
+.setup-intro > .select-subtitle {
+  margin: 0.55rem auto 0;
   color: var(--muted);
   font-size: 0.88rem;
 }
